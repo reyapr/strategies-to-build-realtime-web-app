@@ -4,6 +4,10 @@ export const NotifSSE = () => {
   const [notif, setNotif] = useState(0)
   const [listening, setListening] = useState(false)
   
+  const increment = () => {
+    fetch('http://localhost:3000/sse/notif', { method: 'POST' })
+  }
+  
   useEffect(() => {
     if(!listening) {
       const events = new EventSource('http://localhost:3000/sse/notif')
@@ -19,6 +23,9 @@ export const NotifSSE = () => {
   }, [listening, notif])
   
   return (
-    <div>notif-sse: {notif}</div>
+    <div style={{display: 'flex'}}>
+      <div style={{ marginRight: '10px'}}>notif-sse: {notif}</div>
+      <button onClick={() => increment()}>+</button>
+    </div>
   )
 }
