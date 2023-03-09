@@ -4,10 +4,10 @@ export const NotifLongPolling = () => {
   const [notif, setNotif] = useState(0)
   
   const getNotif = (requestDate) => {
+    console.log('%c[LONG POLLING] req', 'color: red');
     fetch(`http://localhost:3000/long-polling/notif?requestDate=${requestDate}`)
       .then(res => res.json())
       .then(res => {
-        console.log(res, `<=================== res ==================`);
         if(!res.timeout) {
           setNotif(res.count)
         }
@@ -15,11 +15,10 @@ export const NotifLongPolling = () => {
       })
       .catch(err => {
         getNotif(new Date().toISOString())
-        console.log(err, `<=================== err ==================`);
+        console.log(err, `[LONG-POLLING] =================== err ==================`);
       })
   }
   
-  console.log(notif, `<=================== notif ==================`);
   useEffect(() => {
     getNotif(new Date(0).toISOString())
   }, [])

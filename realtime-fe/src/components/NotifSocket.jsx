@@ -2,18 +2,23 @@ import { useEffect, useState } from "react"
 
 const { io } = require("socket.io-client")
 
-const socket = io('http://localhost:3000')
+
 
 export const NotifSocket = () => {
   const [notif, setNotif] = useState(0)
+  const [socket, setSocket] = useState(null)
   
   useEffect(() => {
-    socket.on('notif', (msg) => {
-      setNotif(msg.count)
-    })
+    if(socket) {
+      socket.on('notif', (msg) => {
+        setNotif(msg.count)
+      })
+      
+    } else {
+      setSocket(io('http://localhost:3000'))
+    }
     
-    
-  }, [notif])
+  }, [notif, socket])
   
   return (
     <div style={{display: 'flex'}}>

@@ -1,6 +1,6 @@
 const { ObjectId } = require("mongodb");
 
-const createNotif = (notifCollection) => async (req, res) => {
+const updateNotif = (notifCollection) => async (req, res) => {
   try {
     const response = await notifCollection.findOneAndUpdate(
       { _id: new ObjectId('64032116e05e21c3ae61e530')},
@@ -26,6 +26,6 @@ const getNotif = (notifCollection) => async (req, res) => {
 }
 
 module.exports = {
-  createNotif,
+  updateNotif,
   getNotif
 }

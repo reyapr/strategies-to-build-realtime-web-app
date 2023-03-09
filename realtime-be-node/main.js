@@ -15,7 +15,7 @@ const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
     origin: "http://localhost:3001",
-    methods: ["GET", "POST"]
+    methods: ["GET", "POST", "PATCH"]
   }
 });
 
@@ -33,11 +33,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 const database = client.db('realtime-web-app');
 const notif = database.collection('notif');
 
-app.post('/short-polling/notif', shortPolling.createNotif(notif));
+app.patch('/short-polling/notif', shortPolling.updateNotif(notif));
 app.get('/short-polling/notif', shortPolling.getNotif(notif));
 app.get('/long-polling/notif', longPolling.getNotif(notif));
 app.get('/sse/notif', sse.getNotif(notif))
-app.post('/sse/notif', sse.createNotif(notif))
+app.post('/sse/notif', sse.updateNotif(notif))
 
 io.on('connection', (socket) => {
   console.log('client is connected')

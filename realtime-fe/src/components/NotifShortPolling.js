@@ -5,6 +5,7 @@ export const NotifShortPolling = () => {
   
   const getNotif = () => {
     setInterval(() => {
+      console.log('%c[SHORT POLLING] req', 'color: cyan');
       fetch(`http://localhost:3000/short-polling/notif`)
         .then(res => res.json())
         .then(res => {

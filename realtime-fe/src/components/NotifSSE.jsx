@@ -5,13 +5,14 @@ export const NotifSSE = () => {
   const [listening, setListening] = useState(false)
   
   const increment = () => {
-    fetch('http://localhost:3000/sse/notif', { method: 'POST' })
+    fetch('http://localhost:3000/sse/notif', { method: 'POST'})
   }
   
   useEffect(() => {
     if(!listening) {
       const events = new EventSource('http://localhost:3000/sse/notif')
       events.onmessage = (e) => {
+        console.log('%c[SSE] req', 'color: #60CA40');
         const data = JSON.parse(e.data)
         
         setNotif(data.count)

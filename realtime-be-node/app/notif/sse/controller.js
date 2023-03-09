@@ -31,7 +31,8 @@ const getNotif = (notifCollection) => async (req, res) => {
   });
 }
 
-const createNotif = (notifCollection) => async (req, res) => {
+const updateNotif = (notifCollection) => async (req, res) => {
+  console.log( `<=================== update Notif ==================`);
   try {
     const response = await notifCollection.findOneAndUpdate(
       { _id: new ObjectId('64032116e05e21c3ae61e530')},
@@ -50,5 +51,5 @@ const createNotif = (notifCollection) => async (req, res) => {
 
 module.exports = {
   getNotif,
-  createNotif
+  updateNotif
 }
